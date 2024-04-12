@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "view"
+name = "ai"
 version = "0.1.0"
 description = ""
 authors = ["eslupmi101 <ajsen-andreev@yandex.ru>"]
@@ -7,9 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "3.2"
 python-dotenv = "^1.0.1"
-gunicorn = "^21.2.0"
+fastapi = "0.95.0"
+uvicorn = "^0.29.0"
 
 
 [build-system]

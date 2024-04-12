@@ -2,10 +2,10 @@ FROM python:3.10.12
 
 WORKDIR /app
 
-COPY requirements.txt .
-
-RUN pip install -r /app/requirements.txt --no-cache-dir
+RUN pip install poetry
 
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "accounts.wsgi"]
+RUN poetry install
+
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "accounts.wsgi"]
