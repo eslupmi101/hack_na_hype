@@ -8,4 +8,4 @@ COPY . .
 
 RUN poetry install
 
-CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "accounts.wsgi"]
+CMD ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "view.wsgi"]
