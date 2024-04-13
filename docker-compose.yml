@@ -1,9 +1,14 @@
 version: "3"
 
+volumes:
+  mediafiles:
+
 services:
   view:
     build: ./src/view
     restart: always
+    volumes:
+      - mediafiles:/app/mediafiles
     ports:
       - 8000:8000
     env_file:
@@ -11,7 +16,7 @@ services:
   ai:
     build: ./src/ai
     restart: always
-    ports:
-      - 8001:8000
+    volumes:
+      - mediafiles:/app/mediafiles
     env_file:
       - .env

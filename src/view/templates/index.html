@@ -45,21 +45,19 @@
                 {{ form.number_q|addclass:'form-control' }}
                 <small id="{{ form.number_q.id_for_label }}_help" class="form-text text-muted">{{ form.number_q.help_text }}</small>
             </div>
-            <br>
             <button type="submit" class="btn btn-primary" id="uploadButton">Получить результат</button>
-            <br>
         </form>
         <hr>
+        <h2>Результат</h2>
         <form action="{% url 'prediction:index'%}" method="get">
             <input type="text" name="find_id" placeholder="Поиск по ID" class="form-control">
+            <br>
             <button type="submit" class="btn btn-primary">Поиск</button>
-            <br>
-            <br>
             <button type="submit" name="sort" value="asc" class="btn btn-primary">Сортировать по возрастанию %</button>
             <button type="submit" name="sort" value="desc" class="btn btn-primary">Сортировать по убыванию %</button>
             <button type="submit" class="btn btn-secondary">Очистить</button>
         </form>
-        <h2>Результат</h2>
+        <br>
         <div id="predictionTable">
             <div id="predictionTable">
                 <table class="table table-striped">
