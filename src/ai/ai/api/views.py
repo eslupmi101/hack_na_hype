@@ -2,13 +2,14 @@ from fastapi import APIRouter, status
 from fastapi.openapi.utils import get_openapi
 from fastapi.openapi.docs import get_swagger_ui_html
 
-from .schemas import ResponseData
+from .schemas import RequestData, ResponseData
+from .predictions import get_predictions
 
 api_router = APIRouter(prefix='/api/v1')
 
 
 @api_router.get(
-    '/data',
+    '/predictions',
     response_model=ResponseData,
     status_code=status.HTTP_200_OK,
     summary='Get data',
@@ -18,9 +19,11 @@ api_router = APIRouter(prefix='/api/v1')
         404: {'description': 'Data not found'}
     }
 )
-async def get_data():
+async def get_data(request_data: RequestData):
     return {
-        'data': 'data'
+        'data': await get_predictions(
+            request_data.start_year, request_data.number_q
+        )
     }
 
 

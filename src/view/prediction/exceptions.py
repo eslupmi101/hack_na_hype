@@ -1,0 +1,2 @@
+class PredictionsParseError(Exception):
+    pass
