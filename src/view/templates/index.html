@@ -31,20 +31,7 @@
             </div>
             
             <br>
-
-            <div class="form-group">
-                <label for="{{ form.start_year.id_for_label }}" class="form-label">{{ form.start_year.label }}</label>
-                {{ form.start_year|addclass:'form-control' }}
-                <small id="{{ form.start_year.id_for_label }}_help" class="form-text text-muted">{{ form.start_year.help_text }}</small>
-            </div>
-        
-            <br>
-
-            <div class="form-group">
-                <label for="{{ form.number_q.id_for_label }}" class="form-label">{{ form.number_q.label }}</label>
-                {{ form.number_q|addclass:'form-control' }}
-                <small id="{{ form.number_q.id_for_label }}_help" class="form-text text-muted">{{ form.number_q.help_text }}</small>
-            </div>
+    
             <button type="submit" class="btn btn-primary" id="uploadButton">Получить результат</button>
         </form>
         <hr>
@@ -59,8 +46,6 @@
             <input type="text" name="find_id" placeholder="Поиск по ID" class="form-control">
             <br>
             <button type="submit" class="btn btn-primary">Поиск</button>
-            <button type="submit" name="sort" value="asc" class="btn btn-primary">Сортировать по возрастанию %</button>
-            <button type="submit" name="sort" value="desc" class="btn btn-primary">Сортировать по убыванию %</button>
             <button type="submit" class="btn btn-secondary">Очистить</button>
         </form>
         <br>
@@ -71,7 +56,6 @@
                         <tr>
                             <th>Customer ID</th>
                             <th>Label</th>
-                            <th>%</th>
                         </tr>
                     </thead>
                     
@@ -80,7 +64,6 @@
                             <tr>
                                 <td>{{ prediction.customer_id }}</td>
                                 <td>{{ prediction.label }}</td>
-                                <td>{{ prediction.percentage }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

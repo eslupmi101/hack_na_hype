@@ -1,5 +1,3 @@
-from sklearn.preprocessing import LabelEncoder
-
 from ..predictions.load_WTTE_RNN import WTTE_RNN
 from .schemas import Prediction
 
@@ -11,7 +9,6 @@ async def get_predictions(start_year: int, number_q: int) -> list[dict] | None:
     # Инициализация LabelEncoder
     # label_encoder = LabelEncoder()
 
-    '''
     filepath_for_data = "./mediafiles/train.csv"
 
     filepath_for_model = "./mediafiles/model.keras"
@@ -40,13 +37,9 @@ async def get_predictions(start_year: int, number_q: int) -> list[dict] | None:
     )
     output.to_csv('./mediafiles/result.csv')
 
-    '''
     predictions = []
-    for i in range(1232132):
-        predictions.append(Prediction(customer_id=f"{i}123123312", label=True, percentage=1))
+    for _, row in output.head(500).iterrows():
+        prediction = Prediction(customer_id=row['customer_id'], label=row['label'], percentage=0)
+        predictions.append(prediction)
 
-    # for index, row in output.iterrows():
-    #    prediction = Prediction(customer_id=row['customer_id'], label=row['label'])
-    #    predictions.append(prediction)
-
-    return predictions[:500]
+    return predictions

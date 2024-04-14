@@ -91,8 +91,13 @@ def index(request):
 def download_result_file(request):
     file_path = os.path.join(settings.MEDIA_ROOT, 'result.csv')
 
-    if not os.path.exists(file_path):
+    not_docker_file_path = os.path.join(settings.BASE_DIR, '../ai/mediafiles/result.csv')
+
+    if not os.path.exists(file_path) and not os.path.exists(not_docker_file_path):
         return redirect('prediction:index')
+
+    if os.path.exists(not_docker_file_path):
+        file_path = not_docker_file_path
 
     with open(file_path, 'rb') as file:
         response = HttpResponse(file.read(), content_type='application/force-download')

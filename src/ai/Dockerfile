@@ -1,11 +1,11 @@
-FROM python:3.10.12
+FROM python:3.10.14
 
 WORKDIR /app
 
-RUN pip install poetry
+COPY requirements.txt .
+
+RUN pip install -r /app/requirements.txt --no-cache-dir 
 
 COPY . .
 
-RUN poetry install
-
-CMD ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--workers", "4"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--workers", "2"]
