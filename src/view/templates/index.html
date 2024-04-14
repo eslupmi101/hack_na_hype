@@ -49,6 +49,12 @@
         </form>
         <hr>
         <h2>Результат</h2>
+
+        <h3>Полные данные вы можете скачать по ссылке ниже. На сайте демоданные - 500 штук  </h3>
+    
+        <a href="{% url 'prediction:download_result_file' %}" class="btn btn-primary">Скачать файл</a>
+        <br>
+        <br>
         <form action="{% url 'prediction:index'%}" method="get">
             <input type="text" name="find_id" placeholder="Поиск по ID" class="form-control">
             <br>
@@ -63,8 +69,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Mark</th>
+                            <th>Customer ID</th>
+                            <th>Label</th>
                             <th>%</th>
                         </tr>
                     </thead>
@@ -72,8 +78,8 @@
                     <tbody>
                         {% for prediction in page_obj %}
                             <tr>
-                                <td>{{ prediction.id }}</td>
-                                <td>{{ prediction.mark }}</td>
+                                <td>{{ prediction.customer_id }}</td>
+                                <td>{{ prediction.label }}</td>
                                 <td>{{ prediction.percentage }}</td>
                             </tr>
                         {% endfor %}

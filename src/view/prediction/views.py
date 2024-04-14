@@ -1,5 +1,9 @@
+import os
+
+from django.http import HttpResponse
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.conf import settings
+from django.shortcuts import render, redirect
 import logging
 
 from .dataclass import Prediction
@@ -47,7 +51,7 @@ def index(request):
                 logger.critical('Unexpected error whith parsing predictions training data %s', e)
 
             if data:
-                paginator = Paginator(data, 30)
+                paginator = Paginator(data, 50)
                 page_number = request.GET.get('page')
                 page_obj = paginator.get_page(page_number)
                 context['page_obj'] = page_obj
@@ -63,16 +67,16 @@ def index(request):
     sort_param = request.GET.get('sort')
     if sort_param:
         if sort_param == 'asc':
-            data = sorted(data, key=lambda x: x.percentage)
+            data = sorted(data, key=lambda x: x.percentage if x.percentage else 1)
         elif sort_param == 'desc':
-            data = sorted(data, key=lambda x: x.percentage, reverse=True)
+            data = sorted(data, key=lambda x: x.percentage if x.percentage else 1, reverse=True)
 
     find_id_param = request.GET.get('find_id')
-    if find_id_param and find_id_param.isdigit():
-        data = [obj for obj in data if obj.id == int(find_id_param)]
+    if find_id_param:
+        data = [obj for obj in data if obj.customer_id == find_id_param]
 
     # Pagination
-    paginator = Paginator(data, 30)
+    paginator = Paginator(data, 50)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -82,3 +86,15 @@ def index(request):
         'form': form
     }
     return render(request, 'index.html', context)
+
+
+def download_result_file(request):
+    file_path = os.path.join(settings.MEDIA_ROOT, 'result.csv')
+
+    if not os.path.exists(file_path):
+        return redirect('prediction:index')
+
+    with open(file_path, 'rb') as file:
+        response = HttpResponse(file.read(), content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename="result.csv"'
+        return response

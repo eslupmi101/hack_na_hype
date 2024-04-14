@@ -7,7 +7,7 @@ from .dataclass import Prediction
 from .exceptions import PredictionsParseError
 
 
-def get_prediction_data(start_year: int = 2002, number_q: int = 10) -> list[Prediction] | None:
+def get_prediction_data(start_year: int = 1993, number_q: int = 120) -> list[Prediction] | None:
     parsed_data = []
 
     try:
