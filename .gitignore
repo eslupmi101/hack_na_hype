@@ -176,4 +176,6 @@ src/ai/result1.json
 src/.DS_Store
 src/ai/.DS_Store
 
-mediafiles/
+mediafiles/train.csv
+
+src/view/db.sqlite3
