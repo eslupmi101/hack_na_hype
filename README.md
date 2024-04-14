@@ -65,7 +65,7 @@ source venv/bin/activate
 ```
 или
 ```
-source venv/Srcipts/Activate
+source venv/Scripts/Activate
 ```
 
 Запустить сервер
