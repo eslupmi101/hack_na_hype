@@ -2,9 +2,9 @@ from pydantic import BaseModel
 
 
 class Prediction(BaseModel):
-    id: int
-    mark: bool
-    percentage: int
+    customer_id: str
+    label: bool
+    percentage: int | None
 
 
 class ResponseData(BaseModel):
