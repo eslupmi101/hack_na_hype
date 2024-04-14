@@ -1,4 +1,4 @@
-# On-Hype-NPO
+# Colab
 
 Здесь лежат 3 ноутбука(Colab), файл pdf:
 
