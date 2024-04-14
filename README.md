@@ -91,12 +91,44 @@ cp .env.dist .env
 docker-compose -f docker-compose.yml up -d
 ```
 
-### Веб интерфейс
-```
-localhost:8000
-```
 
 ### UPD Docker
 ```
 Во время ожидания результата сайт может упасть, но после перезагрузки, когда файл будет готов, то скачивание файла станет доступным (демо данные не отображаются)
+```
+
+### Мануальный запуск
+
+Войдите в директорию
+```
+cd src/ai
+```
+
+Скопируйте файл train.csv в папку mediafiles
+```
+src/ai/mediafiles/train.csv
+```
+
+Создать venv
+```
+python -m venv venv
+```
+
+Активировать venv
+```
+source venv/bin/activate
+```
+или
+```
+source venv/Scripts/Activate
+```
+
+Запустите файл manual.py
+```
+python manual.py
+```
+
+Найдите результаты в mefiafiles/result.csv
+```
+src/ai/mediafiles/result.csv
 ```
