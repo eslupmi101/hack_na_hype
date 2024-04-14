@@ -19,6 +19,62 @@
 | fastapi                       | 0.25.0 |
 | uvicorn                       | 0.95.0 | 
 
+### Запуск проекта через localhost
+
+Создать .env, переменные окружения
+Нужно создать .env файл и переместить туда содержимое файла .env.dist
+```
+cp .env.dist .env
+```
+
+Поменять переменную AI_API_URL
+```
+AI_API_URL="http://localhost:8001" 
+```
+
+Войти в папку view
+```
+cd src/view
+```
+
+Установить зависимости
+```
+poetry install --no-root
+```
+
+Запустить сервер
+```
+poetry run python manage.py runserver
+```
+
+Открыть второй терминал
+```
+cd src/ai
+``
+
+Создать venv
+```
+python -m venv venv
+```
+
+Активировать venv
+```
+source venv/bin/activate
+```
+или
+```
+source venv/Srcipts/Activate
+```
+
+Запустить сервер
+```
+uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+Зайти через браузер по порту localhost:8000
+Отправить файл train.cvs
+Дождать демоданных
+Когда появятся демоданные можно будет скачать файл с результатом
 
 ### Запуск проекта через Docker
 
@@ -36,3 +92,4 @@ docker-compose -f docker-compose.yml up -d
 ### Веб интерфейс
 ```
 localhost:8000
+```
