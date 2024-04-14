@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class Prediction(BaseModel):
     customer_id: str
     label: bool
-    percentage: int | None
+    percentage: int
 
 
 class ResponseData(BaseModel):

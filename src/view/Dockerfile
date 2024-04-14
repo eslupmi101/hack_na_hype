@@ -6,7 +6,7 @@ RUN pip install poetry
 
 COPY . .
 
-RUN mkdir mediafiles
+RUN [ ! -d "mediafiles" ] && mkdir mediafiles || true
 
 RUN poetry install
 

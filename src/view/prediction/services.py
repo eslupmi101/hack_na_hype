@@ -26,6 +26,10 @@ def get_prediction_data(start_year: int = 1993, number_q: int = 120) -> list[Pre
 
     prediction_data = []
     for prediction in parsed_data['data']:
-        prediction_data.append(Prediction(**prediction))
+        prediction_data.append(
+            Prediction(
+                **prediction
+            )
+        )
 
     return prediction_data

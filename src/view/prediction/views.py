@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
+
     if request.method == 'POST':
         # Parse data
         form = UploadFileForm(
@@ -39,10 +40,7 @@ def index(request):
             # Get predictions
             data = None
             try:
-                data = get_prediction_data(
-                    start_year=form.cleaned_data['start_year'],
-                    number_q=form.cleaned_data['number_q']
-                )
+                data = get_prediction_data()
 
                 request.session['result_data'] = [obj.as_dict() for obj in data]
             except PredictionsParseError as e:

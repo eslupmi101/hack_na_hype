@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class Prediction:
     id: None = 1
     customer_id: str = ''
-    label: bool = True
+    label: int = 1
     percentage: int = 1
 
     def as_dict(self):

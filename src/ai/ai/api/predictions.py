@@ -1,3 +1,5 @@
+import os
+
 from ..predictions.load_WTTE_RNN import WTTE_RNN
 from .schemas import Prediction
 
@@ -10,6 +12,11 @@ async def get_predictions(start_year: int, number_q: int) -> list[dict] | None:
     # label_encoder = LabelEncoder()
 
     filepath_for_data = "./mediafiles/train.csv"
+
+    not_docker_file_path = '../view/mediafiles/train.csv'
+
+    if not os.path.exists(filepath_for_data):
+        filepath_for_data = not_docker_file_path
 
     filepath_for_model = "./mediafiles/model.keras"
 
@@ -35,7 +42,10 @@ async def get_predictions(start_year: int, number_q: int) -> list[dict] | None:
         b,
         best_threshold
     )
-    output.to_csv('./mediafiles/result.csv')
+
+    path = './mediafiles/result.csv'
+
+    output.to_csv(path)
 
     predictions = []
     for _, row in output.head(500).iterrows():
