@@ -1,0 +1,83 @@
+{% load user_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>На хайпе</title>
+    <!-- Подключаем Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary mb-5">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">На хайпе. Исследование и прогнозирование динамики лояльности участников НПО</span>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
+
+        <h2>Введите CSV train файл</h2>
+        <form id="uploadForm" method="post" enctype="multipart/form-data" action="{% url 'prediction:index'%}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.csv_file.id_for_label }}" class="form-label">{{ form.csv_file.label }}</label>
+                {{ form.csv_file|addclass:'form-control' }}
+            </div>
+            
+            <br>
+    
+            <button type="submit" class="btn btn-primary" id="uploadButton">Получить результат</button>
+        </form>
+        <hr>
+        <h2>Результат</h2>
+
+        <h3>Полные данные вы можете скачать по ссылке ниже. На сайте демоданные - 500 штук  </h3>
+    
+        <a href="{% url 'prediction:download_result_file' %}" class="btn btn-primary">Скачать файл</a>
+        <br>
+        <br>
+        <form action="{% url 'prediction:index'%}" method="get">
+            <input type="text" name="find_id" placeholder="Поиск по ID" class="form-control">
+            <br>
+            <button type="submit" class="btn btn-primary">Поиск</button>
+            <button type="submit" class="btn btn-secondary">Очистить</button>
+        </form>
+        <br>
+        <div id="predictionTable">
+            <div id="predictionTable">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Label</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for prediction in page_obj %}
+                            <tr>
+                                <td>{{ prediction.customer_id }}</td>
+                                <td>{{ prediction.label }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">{% include 'includes/paginator.html' %}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем Bootstrap JS (необязательно) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
