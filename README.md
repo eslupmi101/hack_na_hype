@@ -50,7 +50,7 @@ poetry run python manage.py runserver
 Открыть второй терминал
 ```
 cd src/ai
-``
+```
 
 Создать venv
 ```
